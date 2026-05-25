@@ -48,12 +48,10 @@ t = ":run-shell-command cargo test"
 tab = "move_parent_node_end"
 S-tab = "move_parent_node_start"
 
-[keys.normal.space]
-# git blame
-b = [":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"]
-
-# must have yazi installed
 [keys.normal]
+# git blame
+C-b = [":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"]
+# must have yazi installed
 C-y = [
   ':sh rm -f /tmp/unique-file',
   ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file',
