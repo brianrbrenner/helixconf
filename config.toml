@@ -1,0 +1,63 @@
+theme = "autumn_night"
+
+[editor]
+line-number = "relative"
+mouse = true
+bufferline = "never"
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-progress-messages = true
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+nbsp = "all"
+nnbsp = "all"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.soft-wrap]
+enable = true
+
+[keys.insert]
+S-tab = "move_parent_node_start"
+
+[keys.select]
+tab = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"
+
+[keys.insert.j]
+k = "normal_mode" # Maps `jk` to exit insert mode
+ 
+# create a new minor mode bound to `+`
+[keys.normal."+"]
+m = ":run-shell-command make"
+c = ":run-shell-command cargo build"
+t = ":run-shell-command cargo test"
+# extra support for smart tab if term supports Enhanced Keyboard Protocol
+tab = "move_parent_node_end"
+S-tab = "move_parent_node_start"
+
+[keys.normal.space]
+# git blame
+b = [":sh git blame -L %{cursor_line},%{cursor_line} %{buffer_name}"]
+
+# must have yazi installed
+[keys.normal]
+C-y = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+]
